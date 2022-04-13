@@ -1,0 +1,25 @@
+<launch>
+
+    <!-- <node pkg="atr_nav" type="ros_con.py"/> -->
+    <!-- <include file="$(find atr_nav)/launch/astra_scan.launch"/> -->
+    <!-- <node pkg="atr_nav" type="ros_con.py" name="ros_con" output="screen"></node> -->
+    <arg name="prefix"  default="blue"/>
+
+    <group ns = "$(arg prefix)">
+        <node pkg="atr_nav" type="ros_con.py" name="ros_con" output="screen"></node>
+        <include file="$(find atr_nav)/launch/astra.launch">
+            <arg name="tf_prefix"           value="$(arg prefix)" />
+        </include>
+        <include file="$(find atr_nav)/launch/gmapping.launch">
+            <!-- <arg name="scan_topic"  value="$(arg prefix)/scan" /> -->
+            <arg name="base_frame"  value="$(arg prefix)/base_link"/>
+            <arg name="odom_frame"  value="$(arg prefix)/odom"/>
+            <arg name="map_frame"   value="$(arg prefix)/map"/>
+        </include>
+
+        <node pkg="tf" type="static_transform_publisher" name="camera_to_base" args="0.025 0 0.07 0 0 0 $(arg prefix)/base_link $(arg prefix)/camera_link 20" />
+        <node pkg="tf" type="static_transform_publisher" name="map_to_global" args="0 0 0 0 0 0 map $(arg prefix)/map 20" />
+    </group>
+    
+
+</launch>

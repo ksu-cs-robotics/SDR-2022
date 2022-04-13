@@ -1,0 +1,17 @@
+<launch>
+
+    <node pkg="atr_nav" type="ros_con.py" name="ros_con" output="screen"></node>
+    <include file="$(find atr_nav)/launch/astra.launch"></include>
+    <include file="$(find atr_nav)/launch/gmapping.launch">
+        <!-- <arg name="scan_topic"  value="$(arg prefix)/scan" /> -->
+        <arg name="base_frame"  value="base_link"/>
+        <arg name="odom_frame"  value="odom"/>
+        <arg name="map_frame"   value="map"/>
+    </include>
+
+    <!-- <node pkg="tf" type="static_transform_publisher" name="footprint_to_odom" args="0 0 0 0 0 0 odom base_footprint 20" /> -->
+    <node pkg="tf" type="static_transform_publisher" name="base_to_footprint" args="0 0 0 0 0 0 base_footprint base_link 20" />
+    <node pkg="tf" type="static_transform_publisher" name="camera_to_base" args="0.025 0 0.07 0 0 0 base_link camera_link 20" />
+    <!-- <node pkg="tf" type="static_transform_publisher" name="camera_to_base" args="0.025 0 0.07 0 0 0 base_link camera_link 20" /> -->
+    
+</launch>

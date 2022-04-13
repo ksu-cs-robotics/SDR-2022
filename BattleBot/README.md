@@ -6,6 +6,7 @@
     - ```
         ## LAUNCH AT ROBOT ITSELF
         # launch base driver, camera, and mapping algorithm
+        
         roslaunch atr_nav bringup.launch
         ```
 
@@ -13,18 +14,21 @@
         ## LAUNCH AT REMOTE MASTER
         # open visualizer 
         # add image, map, laserscan tool and set the topic
+
         rosrun rviz rviz
         ```
 
     - ```
         ## LAUNCH AT REMOTE MASTER
         # remote control robot
+
         rosrun teleop_twist_keyboard teleop_twist_keyboard.py
         ```
 
     - ```
         ## LAUNCH AT ROBOT ITSELF
         # Save Map
+
         rosrun map_server map_saver -f ~/map
         ```
 
@@ -36,7 +40,10 @@
     - ```
         ## LAUNCH AT ROBOT ITSELF
         # launch navigation stack
-        roslaunch atr_nav nav.launch
+
+        roslaunch atr_nav nav.launch map_file:=$HOME/map.yaml
+
+        # check following link for more details on how to use rviz to naviagtion: https://emanual.robotis.com/docs/en/platform/turtlebot3/navigation/#estimate-initial-pose
         ```
 
 

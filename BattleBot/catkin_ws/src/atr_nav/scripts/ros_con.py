@@ -147,7 +147,7 @@ def init():
                 odom_temp_folat = [ float(i) for i in data_parsing(data, ODOM_MSG) ]
                 odom = odom_pub_info(odom_temp_folat)
                 odom_pub.publish(odom)
-                print(data)
+                # print(data)
 
         rate.sleep()
 

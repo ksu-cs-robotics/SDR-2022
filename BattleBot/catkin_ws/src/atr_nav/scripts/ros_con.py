@@ -57,18 +57,18 @@ def data_parsing(data_in, msg_type):
                 return data_out[3:3 + int(data_out[2])]
 
 def read_arduino():
-    rospy.loginfo("I am reading")
+    # rospy.loginfo("I am reading")
     data = [0,0,0,0,0,0,0,0,0,0,0]
     odom_tmp = data_parsing(data, ODOM_MSG)
 
 def send_arduino(data_in, size, msg_type):
-    rospy.loginfo("I sending: " + str(data_in))
+    # rospy.loginfo("I sending: " + str(data_in))
     data_out = ("<!" + "," + msg_type + "," + str(size) + ",")
     for i in range(size):
         data_out += str(data_in[i])
         data_out += ","
     data_out += "#>"
-    rospy.loginfo("acutual data_out: " + data_out)
+    # rospy.loginfo("acutual data_out: " + data_out)
     
     arduino.write(data_out.encode("utf-8"))
 
